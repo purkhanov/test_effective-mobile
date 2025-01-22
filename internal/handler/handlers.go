@@ -23,7 +23,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:  []string{"http://*", "https://*"},
-		AllowMethods:  []string{"GET", "POST", "DELETE"},
+		AllowMethods:  []string{"GET", "POST", "PATCH", "DELETE"},
 		AllowHeaders:  []string{"Accept", "Authorization", "Content-Type"},
 		ExposeHeaders: []string{"Content-Length"},
 		MaxAge:        12 * time.Hour,
