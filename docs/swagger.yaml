@@ -1,0 +1,212 @@
+basePath: /
+definitions:
+  models.Music:
+    properties:
+      group:
+        type: string
+      song:
+        type: string
+    required:
+    - group
+    - song
+    type: object
+  models.MusicUpdate:
+    properties:
+      group:
+        type: string
+      link:
+        type: string
+      release_date:
+        type: string
+      song:
+        type: string
+      text:
+        type: string
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8000
+info:
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Online music
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group
+        in: query
+        name: group
+        type: string
+      - description: Song name
+        in: query
+        name: song
+        type: string
+      - description: Release date
+        in: query
+        name: release_date
+        type: string
+      - description: Text
+        in: query
+        name: text
+        type: string
+      - description: offset
+        in: query
+        name: offset
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get musics
+      tags:
+      - music
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body json
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Music'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Add music
+      tags:
+      - music
+  /{music_id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: music ID int
+        in: path
+        name: music_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete music
+      tags:
+      - music
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: music ID int
+        in: path
+        name: music_id
+        required: true
+        type: integer
+      - description: couplet
+        in: query
+        name: couplet
+        type: integer
+      - description: size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get lyrics
+      tags:
+      - music
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: music ID
+        in: path
+        name: music_id
+        required: true
+        type: integer
+      - description: body json
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.MusicUpdate'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Updte musics
+      tags:
+      - music
+schemes:
+- http
+- https
+swagger: "2.0"

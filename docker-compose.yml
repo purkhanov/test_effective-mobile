@@ -1,0 +1,29 @@
+services:
+  music-server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: music_app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - music_net
+
+  db:
+    image: postgres:16
+    container_name: pg_db
+    # ports:
+    #   - "5432:5432"
+    expose:
+      - 5432
+    env_file:
+      - .env
+    networks:
+      - music_net
+
+networks:
+  music_net:

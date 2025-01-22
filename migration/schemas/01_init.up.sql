@@ -1,0 +1,8 @@
+CREATE TABLE musics (
+    id SERIAL PRIMARY KEY,
+    music_group VARCHAR(255) NOT NULL,
+    song VARCHAR(255) NOT NULL,
+    release_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    text TEXT NOT NULL,
+    link VARCHAR(255) NOT NULL
+);
